@@ -1,0 +1,25 @@
+.profile-wrapper {
+  width: 200px;
+
+  padding: 20px;
+  text-align: center;
+  box-sizing: border-box;
+
+  .profile-profile-btn {
+    margin: 15px auto;
+  }
+
+  p {
+    margin: 0 auto 15px;
+  }
+
+  .profile-link-btn-area {
+    padding: 10px;
+
+    .profile-link-btn {
+      margin: 5px;
+      width: 100px;
+    }
+  }
+}
+

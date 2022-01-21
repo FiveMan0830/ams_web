@@ -1,0 +1,69 @@
+.team-manage-wrapper {
+  height: 100%;
+  display: flex;
+  // flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+
+  .table-area {
+    width: 800px;
+    height: 700px;
+    box-shadow: 0 0 8px 1px rgb(128, 128, 128);
+    background: rgb(255, 254, 236);
+    overflow-x: auto;
+    border: 3px solid rgb(184, 184, 184);
+    border-radius: 5px;
+  
+    .team-manage-table {
+      .team-manage-table-toolbar {
+        display: flex;
+        align-items: center;
+        color: black;
+
+        .team-manage-table-title {
+          margin-right: auto;
+          font-size: 24px;
+        }
+      }
+      .team-manage-table-head {
+        .team-manage-table-cell {
+          font-weight: bold;
+          border-bottom: 2px solid gray;
+          // background-color: azure;
+        }
+      }
+      .team-manage-table-body {
+        .team-manage-table-body-row {
+          &:hover {
+            background:rgba(0, 0, 0, .05);
+          }
+
+          .team-manage-table-body-cell {
+            background: rgba(0, 0, 0, 0)!important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.MuiTableCell-root {
+  background: rgb(255, 254, 236)!important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(230, 230, 230);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border: 2px solid rgb(230, 230, 230);
+  width: 10px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, .3);
+}

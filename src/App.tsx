@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Component } from 'react'
+import './App.scss'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Login from './Components/Login'
+import AuthInterceptor from './Helpers/AuthInterceptor'
+import MainContent from './Layouts/MainContent'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<AuthInterceptor />}>
+            <Route path="/*" element={<MainContent />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
+          {/* <Route path="/error" element={<Error />} /> */}
+          {/* <Route path="*" element={<Error />} /> */}
+        </Routes>
+      </BrowserRouter>
+    )
+  }
 }
 
 export default App;
