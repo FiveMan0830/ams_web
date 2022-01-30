@@ -1,10 +1,14 @@
-import { Avatar, Button } from '@mui/material'
+import { Avatar } from '@mui/material'
 import React from 'react'
 import { connect } from 'react-redux'
 import { RootDispatch } from '../Redux/store'
+import { User } from '../Services/UserService'
 import './Profile.scss'
+import ProfileButton from './StyledComponent/ProfileButton'
 
-interface ProfileProps {}
+interface ProfileProps {
+  loginUser: User | null
+}
 
 interface StateToProps {
   logout: Function
@@ -13,12 +17,17 @@ interface StateToProps {
 type Props = ProfileProps & StateToProps
 
 class Profile extends React.Component<Props> {
-  // constructor(props: Props) {
-  //   super(props)
-  // }
   
   goToTimelog = () => {
     // goto timelog
+    const timelogUrl = process.env.REACT_APP_TIMELOG_WEBSITE_URL
+    window.open(timelogUrl, '_blank')
+  }
+
+  handleClickLogout = () => {
+    this.props.logout()
+
+    window.location.reload()
   }
 
   render() {
@@ -27,28 +36,28 @@ class Profile extends React.Component<Props> {
         <Avatar
           className="profile-profile-btn"
         >
-          M
+          {this.props.loginUser?.username?.charAt(0).toUpperCase()}
         </Avatar>
 
-        <p>Display Name</p>
-        <p>Account</p>
+        <p>{this.props.loginUser?.displayName}</p>
+        <p>{this.props.loginUser?.username}</p>
 
         <div className="profile-link-btn-area">
-          <Button
+          <ProfileButton
             variant="contained"
             className="profile-link-btn"
             onClick={this.goToTimelog}
           >
             TIMELOG
-          </Button>
+          </ProfileButton>
 
-          <Button
+          <ProfileButton
             variant="contained" 
             className="profile-link-btn"
-            onClick={() => this.props.logout()}
+            onClick={this.handleClickLogout}
           >
             LOGOUT
-          </Button>
+          </ProfileButton>
         </div>
 
       </div>

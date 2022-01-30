@@ -10,12 +10,10 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<AuthInterceptor />}>
+          <Route element={<AuthInterceptor />}>
             <Route path="/*" element={<MainContent />} />
           </Route>
           <Route path="/login" element={<Login />} />
-          {/* <Route path="/error" element={<Error />} /> */}
-          {/* <Route path="*" element={<Error />} /> */}
         </Routes>
       </BrowserRouter>
     )

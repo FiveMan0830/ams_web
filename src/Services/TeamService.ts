@@ -1,7 +1,15 @@
 import ApiConnector from "../Utils/ApiConnector";
+import { User } from "./UserService";
 
 const apiV1Url = process.env.REACT_APP_AMS_API_V1
 // const apiV2Url = process.env.REACT_APP_AMS_API_V2
+
+export interface Team {
+  id: string
+  name: string
+  leader: User
+  members: User[]
+}
 
 export default class TeamService {
   public static async getBelongingTeams() {
@@ -15,9 +23,22 @@ export default class TeamService {
   public static async getAllTeams() {
     const connector = new ApiConnector(
       'GET',
-      `${apiV1Url}/team`
+      `${apiV1Url}/teams`
     )
     connector.setContentType('application/json')
+    return await connector.call()
+  }
+
+  public static async getTeamMembers(teamName: string) {
+    console.log('teamname', teamName)
+    const connector = new ApiConnector(
+      'GET',
+      `${apiV1Url}/team/${teamName}/members`
+    )
+    connector.setContentType('application/json')
+    connector.setRequestData({
+      teamName: teamName
+    })
     return await connector.call()
   }
 
@@ -52,6 +73,44 @@ export default class TeamService {
     connector.setContentType('application/json')
     connector.setRequestData({
       teamName: teamName
+    })
+    return await connector.call()
+  }
+
+  public static async addMember(userId: string, teamId: string) {
+    const connector = new ApiConnector(
+      'POST',
+      `${apiV1Url}/team/${teamId}/member`
+    )
+    connector.setContentType('application/json')
+    connector.setRequestData({
+      userId: userId
+    })
+    return await connector.call()
+  }
+
+  public static async removeMember(userId: string, teamId: string) {
+    const connector = new ApiConnector(
+      'DELETE',
+      `${apiV1Url}/team/${teamId}/member`
+    )
+    connector.setContentType('application/json')
+    connector.setBearerAuth()
+    connector.setRequestData({
+      userId: userId
+    })
+    return await connector.call()
+  }
+
+  public static async transferOwner(newLeaderId: string, teamId: string) {
+    const connector = new ApiConnector(
+      'POST',
+      `${apiV1Url}/team/${teamId}/leader/handover`
+    )
+    connector.setContentType('application/json')
+    connector.setBearerAuth()
+    connector.setRequestData({
+      newLeaderId: newLeaderId
     })
     return await connector.call()
   }

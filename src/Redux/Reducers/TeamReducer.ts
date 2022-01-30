@@ -1,11 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import TeamService from '../../Services/TeamService'
-
-export interface Team {
-  name: string
-  leader: string
-  members: {name: string}
-}
+import TeamService, { Team } from '../../Services/TeamService'
 
 export interface TeamReducerState {
   teams: Team[]

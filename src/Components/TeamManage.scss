@@ -17,20 +17,26 @@
   
     .team-manage-table {
       .team-manage-table-toolbar {
-        display: flex;
-        align-items: center;
-        color: black;
+        .team-manage-table-toolbar-cell {
+          .team-manage-table-toolbar-content {
+            display: flex;
+            align-items: center;
+            color: black;
+          }
 
-        .team-manage-table-title {
-          margin-right: auto;
-          font-size: 24px;
+          background: rgb(255, 253, 215)!important;
+
+          .team-manage-table-title {
+            margin-right: auto;
+            font-size: 24px;
+          }
         }
       }
       .team-manage-table-head {
         .team-manage-table-cell {
           font-weight: bold;
           border-bottom: 2px solid gray;
-          // background-color: azure;
+          background: rgb(255, 254, 236);
         }
       }
       .team-manage-table-body {
@@ -46,10 +52,6 @@
       }
     }
   }
-}
-
-.MuiTableCell-root {
-  background: rgb(255, 254, 236)!important;
 }
 
 ::-webkit-scrollbar {

@@ -1,72 +1,52 @@
 import { ChangeEvent, Component } from 'react'
 import './Login.scss'
 import AuthService from '../Services/AuthService'
-import { connect } from 'react-redux'
-import { RootState, RootDispatch } from '../Redux/store'
+import Cookies from 'js-cookie'
 
 interface LoginProps {
   location?: string
 }
-
-interface StateToProps {
-  login: Function
-  user: any
-}
-
-type CombinedLoginProps = LoginProps & StateToProps
 
 interface LoginState {
   account: string,
   password: string
 }
 
-class Login extends Component<CombinedLoginProps, LoginState> {
+class Login extends Component<LoginProps, LoginState> {
   private redirectUrl: string
 
-  constructor(props: CombinedLoginProps) {
+  constructor(props: LoginProps) {
     super(props)
-
-    this.handleKeyDown = this.handleKeyDown.bind(this)
-    this.login = this.login.bind(this)
-    this.updateAccount = this.updateAccount.bind(this)
-    this.updatePassword = this.updatePassword.bind(this)
 
     this.state = {
       account: '',
       password: ''
     }
 
-    // if no redirect url exist, use ams as default
-    const query = new URLSearchParams(decodeURI(window.location.search))
-    this.redirectUrl = query.get('redirectUrl') || ''
-    if (this.redirectUrl === '') {
-      this.redirectUrl = '/'
-    }
+    this.redirectUrl = ''
   }
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyDown)
+
+    // if no redirect url exist, use ams as default
+    const query = new URLSearchParams(decodeURIComponent(window.location.search))
+    this.redirectUrl = query.get('redirect_url') || '/'
   }
 
-  handleKeyDown(e: KeyboardEvent) {
+  handleKeyDown = (e: KeyboardEvent) => {
     if (e.code === 'Enter' && this.state.account && this.state.password) {
       this.login()
     }
   }
 
-  async login() {
+  login = async () => {
     try {
-      const res = await AuthService.login(this.state.account, this.state.password)
-      
-      // store access token into localStorage
-      localStorage.setItem('access_token', res.data)
+      const loginRes = await AuthService.login(this.state.account, this.state.password)
+      const accessToken = loginRes.data
 
-      // update redux
-      this.props.login(res.data)
+      this.redirectUrl += `?access_token=${accessToken}`
 
-      console.log('user', this.props.user)
-
-      // redirect
       window.location.href = this.redirectUrl
     } catch (err) {
       console.log(err)
@@ -74,11 +54,11 @@ class Login extends Component<CombinedLoginProps, LoginState> {
     }
   }
 
-  updateAccount(event: ChangeEvent<HTMLInputElement>): void {
+  updateAccount = (event: ChangeEvent<HTMLInputElement>): void => {
     this.setState({account: event.target.value}) 
   }
 
-  updatePassword(event: ChangeEvent<HTMLInputElement>): void {
+  updatePassword = (event: ChangeEvent<HTMLInputElement>): void => {
     this.setState({password: event.target.value})
   }
 
@@ -119,17 +99,4 @@ class Login extends Component<CombinedLoginProps, LoginState> {
   }
 }
 
-const mapStateToProps = (state: RootState) => {
-  console.log('state', state)
-  return {
-    user: state.auth.user
-  }
-}
-
-const mapDispatchToProps = (dispatch: RootDispatch) => {
-  return {
-    login: (accessToken: string) => dispatch({ type: 'auth/login', payload: { accessToken: accessToken }})
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default Login

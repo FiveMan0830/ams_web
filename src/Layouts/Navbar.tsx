@@ -10,9 +10,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import Profile from '../Components/Profile'
 import { Link } from 'react-router-dom';
+import UserService, { User } from '../Services/UserService';
+import { RootDispatch, RootState } from '../Redux/store';
+import { connect } from 'react-redux';
 
 interface NavbarProps {
-  toggleSidebar: Function
+  toggleSidebar: () => void
+  setLoginUser: (user: User) => {type: string, payload: {user: User}}
+  loginUser: User | null
 }
 
 interface NavbarState {
@@ -24,7 +29,17 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
     super(props)
 
     this.state = {
-      profileAnchorEl: null
+      profileAnchorEl: null,
+    }
+  }
+
+  componentDidMount = async () => {
+    try {
+      const res = await UserService.getUserProfile()
+      this.props.setLoginUser(res.data)
+    } catch (err) {
+      alert('failed to get user profile')
+      console.log('failed to get user profile')
     }
   }
 
@@ -67,7 +82,7 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
             className="navbar-profile-btn"
             onClick={this.clickProfileBtn}
           >
-            M
+            {this.props.loginUser?.username?.charAt(0).toUpperCase()}
           </Avatar>
           <Popover
             open={!!this.state.profileAnchorEl}
@@ -83,7 +98,7 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
               horizontal: 'left',
             }}
           >
-            <Profile />
+            <Profile loginUser={this.props.loginUser}/>
           </Popover>
         </div>
       </div>
@@ -91,4 +106,16 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
   }
 }
 
-export default Navbar
+const mapStateToProps = (state: RootState) => {
+  return {
+    loginUser: state.auth.loginUser
+  }
+}
+
+const mapDispatchToProps = (dispatch: RootDispatch) => {
+  return {
+    setLoginUser: (user: User) => dispatch({type: 'auth/setUser', payload: {user: user}})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

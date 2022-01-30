@@ -39,6 +39,7 @@ class MainContent extends React.Component<MainContentProps, MainContentStates> {
             className={`content-right ${this.state.isSidebarOpen ? 'active' : ''}`}
           >
             <Routes>
+              <Route path="/" element={<Navigate to="/home" />} />
               <Route path="/home" element={<Home />} />
               <Route path="/team-manage" element={<Navigate to="/team-manage/teams" />} />
               <Route path="/team-manage/teams" element={<TeamManage />} />

@@ -1,5 +1,6 @@
 import React from 'react'
-import TeamService from '../Services/TeamService'
+import _ from 'lodash'
+import TeamService, { Team } from '../Services/TeamService'
 import UserService from '../Services/UserService'
 import './TeamManage.scss'
 import {
@@ -26,25 +27,19 @@ import {
 } from '@mui/icons-material'
 import { RootState } from '../Redux/store'
 import { connect } from 'react-redux'
-import { Team } from '../Redux/Reducers/TeamReducer'
 
 
 interface Column {
-  id: 'name' | 'leader'
+  id: 'name' | 'leader.username'
   label: string
   minWidth?: number
   align?: 'right'
   format?: (value: number) => string
 }
 
-interface DataRow {
-  name: string
-  leader: string
-}
-
 const columns: readonly Column[] = [
   { id: 'name', label: 'Team', minWidth: 200 },
-  { id: 'leader', label: 'Leader', minWidth: 200 },
+  { id: 'leader.username', label: 'Leader', minWidth: 200 },
 ]
 
 interface TeamManageProps { }
@@ -83,6 +78,11 @@ class TeamManage extends React.Component<CombinedTeamManageProps, TeamManageStat
     }
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  //
+  // functions for event handling
+  //
+  //////////////////////////////////////////////////////////////////////////////
   handleSelectAllClick = () => {
     if (this.props.teams.length !== this.state.selectedTeams.length) {
       this.setState({selectedTeams: this.props.teams.map(team => team.name)})
@@ -151,12 +151,17 @@ class TeamManage extends React.Component<CombinedTeamManageProps, TeamManageStat
     window.location.reload()
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  //
+  // functions for rendering page contents
+  //
+  //////////////////////////////////////////////////////////////////////////////
   buildTableHead = () => {
     return (
       <TableHead>
-        <TableRow>
-          <TableCell colSpan={3} sx={{ boxSizing: 'border-box'}}>
-            <div className="team-manage-table-toolbar">
+        <TableRow className="team-manage-table-toolbar">
+          <TableCell colSpan={3} className="team-manage-table-toolbar-cell">
+            <div className="team-manage-table-toolbar-content">
               <div className="team-manage-table-title">
                 All Teams in AMS
               </div>
@@ -195,13 +200,14 @@ class TeamManage extends React.Component<CombinedTeamManageProps, TeamManageStat
         </TableRow>
       </TableHead>
     )
-  } 
+  }
 
   buildTableBody = () => {
     return (
       <TableBody className="team-manage-table-body">
-        {this.props.teams.map((row: DataRow, idx: number) => {
-          return this.buildTableRow(row, idx)
+        {this.props.teams.map((row: Team, idx: number) => {
+          const team = {...row, leader: row.leader}
+          return this.buildTableRow(team, idx)
         })}
         {this.state.isAddingTeam ? 
           <TableRow>
@@ -237,18 +243,7 @@ class TeamManage extends React.Component<CombinedTeamManageProps, TeamManageStat
     )
   }
 
-  buildTableRow = (row: DataRow, idx: number) => { 
-    // const style = {
-    //   odd: {
-    //     background: '#616161',
-    //     color: 'white'
-    //   },
-    //   event: {
-    //     background: '#757575',
-    //     color: 'white'
-    //   }
-    // }
-
+  buildTableRow = (row: Team, idx: number) => {
     return (
       <TableRow
         hover
@@ -271,7 +266,7 @@ class TeamManage extends React.Component<CombinedTeamManageProps, TeamManageStat
               align={col.align}
               className="team-manage-table-body-cell"
             >
-              {row[col.id]}
+              {_.get(row, col.id)}
             </TableCell>
           ) 
         })}

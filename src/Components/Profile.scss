@@ -1,23 +1,32 @@
-.profile-wrapper {
-  width: 200px;
+@mixin profile-theme {
+  $color: #2d4654;
 
+  background: $color;
+  border: 1px solid $color;
+  color: white;
+}
+
+.profile-wrapper {
+  @include profile-theme;
+
+  width: 200px;
   padding: 20px;
   text-align: center;
   box-sizing: border-box;
 
   .profile-profile-btn {
-    margin: 15px auto;
+    margin: 0 auto;
   }
 
   p {
-    margin: 0 auto 15px;
+    margin: 15px auto 0;
   }
 
   .profile-link-btn-area {
-    padding: 10px;
+    padding-top: 10px;
 
     .profile-link-btn {
-      margin: 5px;
+      margin: 10px 5px;
       width: 100px;
     }
   }
