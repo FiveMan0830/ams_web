@@ -1,7 +1,6 @@
 import { ChangeEvent, Component } from 'react'
 import './Login.scss'
 import AuthService from '../Services/AuthService'
-import Cookies from 'js-cookie'
 
 interface LoginProps {
   location?: string

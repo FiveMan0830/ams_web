@@ -124,10 +124,14 @@ class TeamManage extends React.Component<CombinedTeamManageProps, TeamManageStat
         this.state.newTeamName,
         this.state.newTeamLeader
       )
-
+    } catch (err: any) {
+      if (err.response.status === 403) {
+        alert(err.response.data.error)
+      } else {
+        alert(`failed to add team`)
+      }
+    } finally {
       window.location.reload()
-    } catch (err) {
-      console.log('failed to add team')
     }
   }
 
@@ -136,14 +140,15 @@ class TeamManage extends React.Component<CombinedTeamManageProps, TeamManageStat
   }
 
   handleConfirmDeleteTeam = async () => {
-    console.log(this.state.selectedTeams)
-    console.log(this.props.teams)
-
     for (let i = 0; i < this.state.selectedTeams.length; i++) {
       try {
         await TeamService.deleteTeam(this.state.selectedTeams[i])
-      } catch (err) {
-        console.log('failed to delete team', this.state.selectedTeams[i])
+      } catch (err: any) {
+        if (err.response.status === 403) {
+          alert(err.response.data.error)
+        } else {
+          alert(`failed to delete team ${this.state.selectedTeams[i]}`)
+        }
       }
     }
 

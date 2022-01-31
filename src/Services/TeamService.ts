@@ -58,6 +58,7 @@ export default class TeamService {
       `${apiV1Url}/team/create`
     )
     connector.setContentType('application/json')
+    connector.setBearerAuth()
     connector.setRequestData({
       teamName: teamName,
       teamLeader: teamLeader
@@ -71,6 +72,7 @@ export default class TeamService {
       `${apiV1Url}/team/delete`
     )
     connector.setContentType('application/json')
+    connector.setBearerAuth()
     connector.setRequestData({
       teamName: teamName
     })
