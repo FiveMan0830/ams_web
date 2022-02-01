@@ -3,11 +3,13 @@ import './Sidebar.scss'
 import {
   Home as HomeIcon,
   Group as GroupIcon,
+  Person as PersonIcon,
+  Settings as SettingsIcon
 } from '@mui/icons-material';
 import { Divider } from '@mui/material';
-import SidebarButton from './StyledComponent/SidebarButton'
-import BareLink from './StyledComponent/Link'
-import withRouter from './HelperComponent/WithRouteWrapperComponent';
+import SidebarButton from '../Components/StyledComponent/SidebarButton'
+import BareLink from '../Components/StyledComponent/Link'
+import withRouter from '../Components/HelperComponent/WithRouteWrapperComponent';
 import { Location, NavigateFunction, Params } from 'react-router-dom';
 
 interface SidebarProps {
@@ -47,6 +49,7 @@ class Sidebar extends React.Component<SidebarProps, SidebarStates> {
   }
 
   render() {
+    const currentPath = window.location.pathname
     return (
       <div className="sidebar-wrapper">
         <BareLink to="/home">
@@ -58,13 +61,36 @@ class Sidebar extends React.Component<SidebarProps, SidebarStates> {
           </SidebarButton>
         </BareLink>
         <Divider variant="fullWidth" className="sidebar-divider"/>
+
+        <div className="sidebar-user-manage-wrapper">
+          <BareLink to="/user-manage">
+            <div className="sidebar-user-manage-title">
+              <div className={`sidebar-user-manage-option-background ${'/user-manage' === currentPath ? 'active' : ''}`} />
+              <PersonIcon sx={{marginRight: 1}} />
+              <span>User Manage</span>
+            </div>
+          </BareLink>
+        </div>
+
         <div className="sidebar-team-manage-wrapper">
-          <div className="sidebar-team-manage-title">
-            <GroupIcon sx={{marginRight: 1}} />
-            <span>Team Manage</span>
-          </div>
+          <BareLink to="/team-manage">
+            <div className="sidebar-team-manage-title">
+              <GroupIcon sx={{marginRight: 1}} />
+              <span>Team Manage</span>
+            </div>
+          </BareLink>
 
           {this.renderTeamManageArea()}
+        </div>
+
+        <div className="sidebar-settings">
+          <BareLink to="/settings">
+            <div className="sidebar-settings-title">
+              <div className={`sidebar-settings-background ${'/settings' === currentPath ? 'active' : ''}`} />
+              <SettingsIcon sx={{marginRight: 1}} />
+              <span>Settings</span>
+            </div>
+          </BareLink>
         </div>
       </div>
     )
