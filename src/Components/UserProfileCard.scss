@@ -1,0 +1,90 @@
+@mixin icon-color($color: rgb(255, 255, 255)) {
+  .MuiSvgIcon-root {
+    color: $color;
+  }
+}
+
+@mixin icon-hover-color($color) {
+  .MuiSvgIcon-root:hover {
+    color: $color;
+  }
+}
+
+.member-profile {
+  @include icon-color;
+  @include icon-hover-color(rgb(0, 177, 177));
+
+  position: relative;
+  min-height: 140px;
+  background: rgb(51, 56, 65);
+
+  &.col-1 {
+    width: 96%;
+    margin: 2%;
+  }
+
+  &.col-2 {
+    width: 47%;
+    margin: 1.5%;
+  }
+
+  &.col-3 {
+    width: 31%;
+    margin: 1.166%;
+  }
+
+  padding: 10px;
+  border-radius: 5px;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 7px -1px rgba(0, 0, 0, 0.527);
+
+  .member-profile-avatar-area {
+    color: white;
+    display: flex;
+    align-items: center;
+    padding-bottom: 5px;
+
+    .member-profile-avatar {
+      margin-right: 10px;
+      background: gray;
+    }
+
+    .leader-icon-area {
+      min-width: 24;
+      min-height: 24;
+      padding-right: 8px;
+
+      .leader-icon {
+        fill: white;
+      }
+    }
+
+    .member-profile-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  }
+
+  .member-profile-content {
+    color: white;
+    .member-profile-section {
+      padding-top: 10px;
+    }
+    .profile-key {
+      display: inline-block;
+      min-width: 50px;
+    }
+    .profile-value {
+      &::before {
+        content: "\00a0\00a0";
+        border-left: 3px solid rgb(148, 148, 148);
+      }
+    }
+  }
+
+  .operation-btn-area {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+  }
+}
