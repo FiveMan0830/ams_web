@@ -1,3 +1,5 @@
+@import '../Styles/layouts';
+
 .main {
   height: inherit;
 }
@@ -9,38 +11,68 @@
   background: #4e4d5c;
   box-sizing: border-box;
   position: relative;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
 
-  .sidebar {
-    position: fixed;
-    height: 100%;
-    width: 225px;
-    background: #2d4654;
-    color: white;
-    box-shadow: none;
-    z-index: 80;
+  @include mobile {
+    .sidebar {
+      width: 100%;
+      background: #2d4654;
+      color: white;
+      box-shadow: none;
+      display: none;
 
-    left: -225px;
-    &.active {
-      left: 0px;
-      box-shadow: 2px 0px 8px #1c2c35;
+      &.active {
+        display: block;    
+        height: 100%;
+        position: absolute;
+        z-index: 80;
+        height: calc(100% - 60px);
+      }
     }
 
-    transition: left .5s, box-shadow .5s;
+    .content-right {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+    }
   }
 
-  .content-right {
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    min-width: 900px;
-    box-sizing: border-box;
+  @include tablet {
+    .sidebar {
+      position: fixed;
+      height: calc(100% - 60px);
+      width: 225px;
+      background: #2d4654;
+      color: white;
+      box-shadow: none;
+      z-index: 80;
+      display: block;
 
-    padding-left: 0px;
-    &.active {
-      padding-left: 225px;
+      left: -225px;
+      &.active {
+        position: fixed;
+        left: 0px;
+        box-shadow: 2px 0px 8px #1c2c35;
+      }
+
+      transition: left .5s, box-shadow .5s;
     }
 
-    transition: padding-left .5s;
+    .content-right {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      // min-width: 900px;
+      box-sizing: border-box;
+
+      padding-left: 0px;
+      &.active {
+        padding-left: 225px;
+      }
+
+      transition: padding-left .5s;
+    }
   }
 }

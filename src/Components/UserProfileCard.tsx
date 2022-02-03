@@ -10,33 +10,25 @@ import {
 
 interface UserProfileCardProps {
   user: User
-  showOperations: boolean
   showLeaderIcon: boolean
-  col: 'col-1' | 'col-2' | 'col-3'
 
-  handleClickTransferOwner: (user: User) => void | null
-  handleClickRemoveMember: (user: User) => void | null
+  onClickTransferOwner?: ((user: User) => void)
+  onClickRemoveMember?: ((user: User) => void)
 }
 
 interface UserProfileCardState { }
 
 class UserProfileCard extends React.Component<UserProfileCardProps, UserProfileCardState> {
-  constructor(props: UserProfileCardProps) {
-    super(props)
-
-    
-  }
-
   public static defaultProps = {
     showLeaderIcon: false,
-    handleClickTransferOwner: null,
-    handleClickRemoveMember: null
+    onClickTransferOwner: null,
+    onClickRemoveMember: null
   }
 
   render(): React.ReactNode {
     return (
       <div
-        className={`member-profile ${this.props.col}`}
+        className="member-profile"
         key={this.props.user.userId}
       >
         <div className="member-profile-avatar-area">
@@ -68,24 +60,34 @@ class UserProfileCard extends React.Component<UserProfileCardProps, UserProfileC
             <span className="profile-value">{this.props.user.displayName}</span>
           </div>
         </div>
-        {this.props.showOperations ? 
-          <div className="operation-btn-area">
+        <div className="operation-btn-area">
+          {this.props.onClickTransferOwner ? 
             <IconButton
               sx={{ width: 15, height: 15, margin: 1 }}
-              onClick={() => this.props.handleClickTransferOwner(this.props.user)}
+              onClick={() => {
+                if (this.props.onClickTransferOwner)
+                  return this.props.onClickTransferOwner(this.props.user)
+              }}
             >
               <TransferOwnershipIcon />
             </IconButton>
+          :
+            null
+          }
+          {this.props.onClickRemoveMember ?
             <IconButton
               sx={{ width: 15, height: 15, margin: 1 }}
-              onClick={() => this.props.handleClickRemoveMember(this.props.user)}
+              onClick={() => {
+                if (this.props.onClickRemoveMember)
+                  return this.props.onClickRemoveMember(this.props.user)
+              }}
             >
               <PersonRemoveIcon />
             </IconButton>
-          </div>
-        :
-          null
-        }
+          : 
+            null
+          }
+        </div>
       </div>
     ) 
   }

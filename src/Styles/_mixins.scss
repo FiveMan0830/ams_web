@@ -1,3 +1,60 @@
 @mixin under-score {
   text-decoration: underline; 
 }
+
+@mixin mui-bright-input {
+  $select-color: rgb(255, 255, 255);
+  $select-active-color: rgb(138, 202, 255);
+
+  .MuiInputLabel-root {
+    color: $select-color;
+
+    &.Mui-focused {
+      color: $select-active-color;
+    }
+  }
+  .MuiInput-root {
+    color: $select-color;
+    &::before {
+      border-bottom: 1px solid $select-color;
+      &:hover {
+        border-bottom: 1px solid yellow;
+      }
+    }
+    &::after {
+      border-bottom: 2px solid $select-active-color;
+    }
+  }
+}
+
+@mixin mui-icon-color($color: rgb(255, 255, 255)) {
+  .MuiSvgIcon-root {
+    color: $color;
+  }
+}
+
+@mixin mui-icon-hover-color($color) {
+  .MuiSvgIcon-root:hover {
+    color: $color;
+  }
+}
+
+@mixin mui-dialog-theme {
+  .MuiDialog-root .MuiPaper-root {
+    background: #1d3340;
+    border: 2px solid #213b4a;
+
+    .MuiDialogTitle-root {
+      color: white;
+    }
+
+    .MuiDialogContentText-root {
+      color: white;
+    }
+  }
+
+  .highlight-text {
+    text-decoration: underline;
+    font-weight: bolder;
+  }
+}

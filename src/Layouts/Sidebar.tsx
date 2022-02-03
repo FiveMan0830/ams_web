@@ -83,7 +83,7 @@ class Sidebar extends React.Component<SidebarProps, SidebarStates> {
           {this.renderTeamManageArea()}
         </div>
 
-        <div className="sidebar-settings">
+        {/* <div className="sidebar-settings">
           <BareLink to="/settings">
             <div className="sidebar-settings-title">
               <div className={`sidebar-settings-background ${'/settings' === currentPath ? 'active' : ''}`} />
@@ -91,7 +91,7 @@ class Sidebar extends React.Component<SidebarProps, SidebarStates> {
               <span>Settings</span>
             </div>
           </BareLink>
-        </div>
+        </div> */}
       </div>
     )
   }

@@ -9,6 +9,14 @@ export interface User {
   email: string
 }
 
+export interface CreateUserPayload {
+  username: string
+  givenname: string
+  surname: string
+  email: string
+  password: string
+}
+
 export default class UserService {
   public static async getAllUsers() {
     const connector = new ApiConnector(
@@ -25,6 +33,28 @@ export default class UserService {
     )
     connector.setBearerAuth()
     
+    return await connector.call()
+  }
+
+  public static async createUser(payload: CreateUserPayload) {
+    const connector = new ApiConnector(
+      'POST',
+      `${apiV1Url}/user`
+    )
+    connector.setContentType('application/json')
+    connector.setBearerAuth()
+    connector.setRequestData(payload)
+
+    return await connector.call()
+  }
+
+  public static async deleteUser(userId: string) {
+    const connector = new ApiConnector(
+      'DELETE',
+      `${apiV1Url}/user/${userId}`
+    )
+    connector.setBearerAuth()
+
     return await connector.call()
   }
 }

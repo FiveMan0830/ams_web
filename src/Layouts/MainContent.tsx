@@ -8,6 +8,7 @@ import Navbar from './Navbar'
 import './MainContent.scss'
 import Sidebar from '../Layouts/Sidebar'
 import UserManage from '../Components/UserManage'
+import Settings from '../Components/Settings'
 
 interface MainContentProps {}
 
@@ -46,6 +47,8 @@ class MainContent extends React.Component<MainContentProps, MainContentStates> {
               <Route path="/team-manage" element={<Navigate to="/team-manage/teams" />} />
               <Route path="/team-manage/teams" element={<TeamManage />} />
               <Route path="/team-manage/members" element={<MemberManage />} />
+              {/* <Route path="/settings" element={<Navigate to="/settings/edit-profile" />} />
+              <Route path="/settings/edit-profile" element={<Settings />} /> */}
               <Route path="*" element={<Error />} />
             </Routes>
           </div>

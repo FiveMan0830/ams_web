@@ -9,7 +9,6 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 
 import Profile from '../Components/Profile'
-import { Link } from 'react-router-dom';
 import UserService, { User } from '../Services/UserService';
 import { RootDispatch, RootState } from '../Redux/store';
 import { connect } from 'react-redux';
@@ -72,10 +71,6 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
           <span>
             AMS_LOGO
           </span>
-        </div>
-        <div className="navbar-navigation">
-          <Link to="/team-manage" className="navbar-navigation-link">Team Manage</Link>
-          <Link to="/home" className="navbar-navigation-link">Home</Link>
         </div>
         <div className="navbar-profile-area">
           <Avatar

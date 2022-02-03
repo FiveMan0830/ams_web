@@ -1,34 +1,26 @@
-@mixin icon-color($color: rgb(255, 255, 255)) {
-  .MuiSvgIcon-root {
-    color: $color;
-  }
-}
-
-@mixin icon-hover-color($color) {
-  .MuiSvgIcon-root:hover {
-    color: $color;
-  }
-}
+@import '../Styles/mixins';
+@import '../Styles/layouts';
 
 .member-profile {
-  @include icon-color;
-  @include icon-hover-color(rgb(0, 177, 177));
+  @include mui-icon-color;
+  @include mui-icon-hover-color(rgb(0, 177, 177));
 
   position: relative;
   min-height: 140px;
+  // max-height: 140px;
   background: rgb(51, 56, 65);
-
-  &.col-1 {
+  
+  @include mobile {
     width: 96%;
     margin: 2%;
   }
 
-  &.col-2 {
+  @include small-screen {
     width: 47%;
     margin: 1.5%;
   }
 
-  &.col-3 {
+  @include desktop {
     width: 31%;
     margin: 1.166%;
   }

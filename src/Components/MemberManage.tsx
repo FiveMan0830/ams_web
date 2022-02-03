@@ -2,7 +2,6 @@ import React from 'react'
 import './MemberManage.scss'
 import {
   Autocomplete,
-  Avatar,
   Button,
   Dialog,
   DialogActions,
@@ -14,8 +13,6 @@ import {
 
 import {
   AddCircleOutline as AddCircleOutlineIcon,
-  ImportExport as TransferOwnershipIcon,
-  PersonRemove as PersonRemoveIcon,
 } from '@mui/icons-material';
 
 import { connect } from 'react-redux';
@@ -24,7 +21,6 @@ import { fetchAllTeams } from '../Redux/Reducers/TeamReducer';
 
 import TeamService, { Team } from '../Services/TeamService';
 import UserService, { User } from '../Services/UserService';
-import { parseJWT } from '../Utils/JWTParser';
 import UserProfileCard from './UserProfileCard';
 
 
@@ -67,7 +63,7 @@ class MemberManage extends React.Component<CombinedMemberManageProps, MemberMana
       isDeleteMemberPopupOpen: false,
       selectedRemoveUser: null,
       isTransferOwnerPopupOpen: false,
-      selectedNewLeader: null
+      selectedNewLeader: null,
     }
   }
 
@@ -78,7 +74,6 @@ class MemberManage extends React.Component<CombinedMemberManageProps, MemberMana
   //////////////////////////////////////////////////////////////////////////////
   handleSelectTeam = async (team: Team) => {
     this.setState({selectedTeam: team})
-    parseJWT('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDU2ODc2NDAsInVpZCI6IjVkNzk0OTgyLTU3MDUtNDgxMy1hNDc3LTc5OTg1N2IyY2Q5NiJ9.lw2MPoqn0wTa8itNCUMzlqgwwdZMGFUsOj4WhItuoDM')
   }
 
   handleClickAddMember = async () => {
@@ -183,15 +178,14 @@ class MemberManage extends React.Component<CombinedMemberManageProps, MemberMana
     if (this.state.selectedTeam) {
       const leader = this.state.selectedTeam.leader
       const isLoginUserLeader = this.props.loginUserId === this.state.selectedTeam.leader.userId
+
       return (
         <div className="member-area">
 
           {/* show leader */}
           <UserProfileCard
             user={leader}
-            showOperations={false}
             showLeaderIcon
-            col="col-3"
           />
 
           {/* show members */}
@@ -199,10 +193,8 @@ class MemberManage extends React.Component<CombinedMemberManageProps, MemberMana
             this.state.selectedTeam?.leader.userId !== member.userId ?
               <UserProfileCard
                 user={member}
-                showOperations={isLoginUserLeader}
-                col="col-3"
-                handleClickTransferOwner={this.handleClickTransferOwner}
-                handleClickRemoveMember={this.handleClickRemoveMember}
+                onClickTransferOwner={isLoginUserLeader ? this.handleClickTransferOwner : undefined }
+                onClickRemoveMember={isLoginUserLeader ? this.handleClickRemoveMember : undefined }
               />
             :
               null
@@ -264,21 +256,9 @@ class MemberManage extends React.Component<CombinedMemberManageProps, MemberMana
   }
 
   render() {
-    const dialogStyle = {
-      background: '#1d3340',
-      border: '2px solid #213b4a'
-    }
-    const dialogTextStyle = {
-      color: 'white'
-    }
-    const dialogHighlightTextStyle = {
-      textDecoration: 'underline',
-      fontWeight: 'bolder'
-    }
-
     return (
       <div className="member-manage-wrapper">
-        <div className="control-area">
+        <div className="member-manage-area">
           <div className="team-selection-area">
             <span className="title">Team:</span>   
             <Autocomplete
@@ -301,20 +281,15 @@ class MemberManage extends React.Component<CombinedMemberManageProps, MemberMana
           onClose={this.handleCancelRemoveMember}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
-          PaperProps={{ style: dialogStyle }}
         >
           <DialogContent>
-            <DialogContentText sx={dialogTextStyle}>
+            <DialogContentText>
               {"Are you sure to remove user "}
-              <span
-                style={dialogHighlightTextStyle}
-              >
+              <span className="highlight-text">
                 {this.state.selectedRemoveUser?.username}
               </span>
               {" from team "}
-              <span
-                style={dialogHighlightTextStyle}
-              >
+              <span className="highlight-text">
                 {this.state.selectedTeam?.name}
               </span>
             </DialogContentText>
@@ -330,14 +305,11 @@ class MemberManage extends React.Component<CombinedMemberManageProps, MemberMana
           onClose={this.handleCancelTransferOwner}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
-          PaperProps={{ style: dialogStyle }}
         >
           <DialogContent>
-            <DialogContentText sx={dialogTextStyle}>
+            <DialogContentText>
               {"Are you sure to transfer the leader to "}
-              <span
-                style={dialogHighlightTextStyle}
-              >
+              <span className="highlight-text">
                 {this.state.selectedNewLeader?.username}
               </span>
             </DialogContentText>

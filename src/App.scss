@@ -1,3 +1,5 @@
+@import './Styles/mixins';
+
 .App {
   text-align: center;
 }
@@ -36,3 +38,6 @@
     transform: rotate(360deg);
   }
 }
+
+
+@include mui-dialog-theme;

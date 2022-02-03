@@ -1,48 +1,15 @@
+@import "../Styles/layouts";
 @import "../Styles/mixins";
 
-@mixin bright-select {
-  $select-color: rgb(255, 255, 255);
-  $select-active-color: rgb(138, 202, 255);
-
-  .MuiInputLabel-root {
-    color: $select-color;
-  }
-  .MuiInput-root {
-    color: $select-color;
-    &::before {
-      border-bottom: 1px solid $select-color;
-    }
-    &::after {
-      border-bottom: 2px solid $select-active-color;
-    }
-  }
-}
-
-@mixin icon-color($color: rgb(255, 255, 255)) {
-  .MuiSvgIcon-root {
-    color: $color;
-  }
-}
-
-@mixin icon-hover-color($color) {
-  .MuiSvgIcon-root:hover {
-    color: $color;
-  }
-}
-
-@mixin icon-disabled {
-  .Mui-disabled:hover {
-    cursor: grab;
-  }
-}
-
 .member-manage-wrapper {
+
   height: 100%;
   display: flex;
   justify-content: center;
 
-  .control-area {
+  .member-manage-area {
     width: 1000px;
+    // min-width: 600px;
     border-radius: 5px;
 
     .team-selection-area {
@@ -52,7 +19,7 @@
       align-items: flex-end;
       padding: 10px 20px;
       height: 10%;
-      
+ 
       .title {
         font-size: 1.5rem;
         font-weight: 600;
@@ -60,10 +27,9 @@
         margin-bottom: 2px;
       }
 
-
       .team-select {
-        @include bright-select;
-        @include icon-color;
+        @include mui-bright-input;
+        @include mui-icon-color;
 
         width: 200px;
       }
@@ -76,76 +42,25 @@
       display: flex;
       flex-wrap: wrap;
 
-      .member-profile {
-        @include icon-color;
-        @include icon-hover-color(rgb(0, 177, 177));
-
-        position: relative;
-        width: 31%;
-        min-height: 140px;
-        margin: 1.166%;
-        background: rgb(51, 56, 65);
-
-        padding: 10px;
-        border-radius: 5px;
-        box-sizing: border-box;
-        box-shadow: 0px 0px 7px -1px rgba(0, 0, 0, 0.527);
-
-        .member-profile-avatar-area {
-          color: white;
-          display: flex;
-          align-items: center;
-          padding-bottom: 5px;
-
-          .member-profile-avatar {
-            margin-right: 10px;
-            background: gray;
-          }
-
-          .leader-icon-area {
-            min-width: 24;
-            min-height: 24;
-            padding-right: 8px;
-
-            .leader-icon {
-              fill: white;
-            }
-          }
-
-          .member-profile-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-          }
-        }
-
-        .member-profile-content {
-          color: white;
-          .member-profile-section {
-            padding-top: 10px;
-          }
-          .profile-key {
-            display: inline-block;
-            min-width: 50px;
-          }
-          .profile-value {
-            &::before {
-              content: "\00a0\00a0";
-              border-left: 3px solid rgb(148, 148, 148);
-            }
-          }
-        }
-
-        .operation-btn-area {
-          position: absolute;
-          top: 3px;
-          right: 3px;
-        }
-      }
-
       .add-member-wrapper {
-        @include bright-select;
-        @include icon-color;
-        @include icon-hover-color(rgb(0, 177, 177));
+        @include mui-bright-input;
+        @include mui-icon-color;
+        @include mui-icon-hover-color(rgb(0, 177, 177));
+
+        @include mobile {
+          width: 96%;
+          margin: 2%;
+        }
+
+        @include small-screen {
+          width: 47%;
+          margin: 1.5%;
+        }
+
+        @include desktop {
+          width: 31%;
+          margin: 1.166%;
+        }
 
         width: 31%;
         min-height: 140px;

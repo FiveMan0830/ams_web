@@ -1,0 +1,24 @@
+.settings-wrapper {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+
+  .settings-area {
+    width: 700px;
+
+    .settings-header {
+      padding: 20px;
+      box-sizing: border-box;
+      color: white;
+
+      .settings-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+      }
+    }
+
+    .settings-body {
+      padding: 20px;
+    }
+  }
+}
