@@ -7,9 +7,9 @@ interface SettingsProps { }
 interface SettingsState { }
 
 class Settings extends React.Component<SettingsProps, SettingsState> {
-  constructor (props: SettingsProps) {
-    super(props) 
-  }
+  // constructor (props: SettingsProps) {
+  //   super(props) 
+  // }
 
   render(): React.ReactNode {
     return (

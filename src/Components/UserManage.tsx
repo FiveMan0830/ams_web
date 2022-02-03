@@ -152,7 +152,7 @@ class UserManage extends React.Component<UserManageProps, UserManageState> {
   handleConfirmAddUser = async () => {
     this.setState({ isSubmitAddUserClicked: true })
     try {
-      const res = await UserService.createUser({
+      await UserService.createUser({
         username: this.state.addUserFormData.username,
         givenname: this.state.addUserFormData.name,
         surname: this.state.addUserFormData.surname,
@@ -162,7 +162,7 @@ class UserManage extends React.Component<UserManageProps, UserManageState> {
 
       window.location.reload()
     } catch (err: any) {
-      if (err.response.status === 403 || err.response.status == 409)
+      if (err.response.status === 403 || err.response.status === 409)
         alert(err.response.data.error)
       else
         alert('failed to create user')

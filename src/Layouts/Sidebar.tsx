@@ -4,7 +4,7 @@ import {
   Home as HomeIcon,
   Group as GroupIcon,
   Person as PersonIcon,
-  Settings as SettingsIcon
+  // Settings as SettingsIcon
 } from '@mui/icons-material';
 import { Divider } from '@mui/material';
 import SidebarButton from '../Components/StyledComponent/SidebarButton'

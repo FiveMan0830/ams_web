@@ -8,7 +8,7 @@ import Navbar from './Navbar'
 import './MainContent.scss'
 import Sidebar from '../Layouts/Sidebar'
 import UserManage from '../Components/UserManage'
-import Settings from '../Components/Settings'
+// import Settings from '../Components/Settings'
 
 interface MainContentProps {}
 
