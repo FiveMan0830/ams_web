@@ -193,6 +193,7 @@ class MemberManage extends React.Component<CombinedMemberManageProps, MemberMana
             this.state.selectedTeam?.leader.userId !== member.userId ?
               <UserProfileCard
                 user={member}
+                key={member.userId}
                 onClickTransferOwner={isLoginUserLeader ? this.handleClickTransferOwner : undefined }
                 onClickRemoveMember={isLoginUserLeader ? this.handleClickRemoveMember : undefined }
               />

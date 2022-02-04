@@ -207,8 +207,7 @@ class UserManage extends React.Component<UserManageProps, UserManageState> {
                   user={user}
                   key={user.userId}
                   onClickRemoveMember={this.handleClickDeleteUser}
-                >
-                </UserProfileCard>
+                />
               ))
             }
           </div>
