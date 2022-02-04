@@ -30,7 +30,6 @@ export function parseJWT(jwtStr: string | null): Jwt | null {
 
   // console.log(header)
   // console.log(payload)
-  JSON.parse(header)
 
   const jwt: Jwt = {
     header: JSON.parse(header) as JwtHeader,

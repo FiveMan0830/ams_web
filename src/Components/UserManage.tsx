@@ -144,8 +144,6 @@ class UserManage extends React.Component<UserManageProps, UserManageState> {
           [field]: event.target.value
         }
       }
-    }, () => {
-      console.log(this.state.addUserFormData)
     })
   }
 

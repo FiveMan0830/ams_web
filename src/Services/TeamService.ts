@@ -30,7 +30,6 @@ export default class TeamService {
   }
 
   public static async getTeamMembers(teamName: string) {
-    console.log('teamname', teamName)
     const connector = new ApiConnector(
       'GET',
       `${apiV1Url}/team/${teamName}/members`
