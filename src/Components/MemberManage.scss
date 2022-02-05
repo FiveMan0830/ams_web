@@ -2,10 +2,16 @@
 @import "../Styles/mixins";
 
 .member-manage-wrapper {
-
   height: 100%;
   display: flex;
-  justify-content: center;
+
+  @include mobile {
+    justify-content: left;
+  }
+
+  @include small-screen {
+    justify-content: center;
+  }
 
   .member-manage-area {
     width: 1000px;
@@ -31,7 +37,7 @@
         @include mui-bright-input;
         @include mui-icon-color;
 
-        width: 200px;
+        width: 250px;
       }
     }
 

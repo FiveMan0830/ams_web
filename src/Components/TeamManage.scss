@@ -1,9 +1,18 @@
+@import '../Styles/layouts';
+
 .team-manage-wrapper {
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  overflow: auto;
 
+  @include mobile {
+    align-items: flex-start;
+  }
+
+  @include tablet {
+    align-items: center;
+  }
 
   .table-area {
     width: 800px;
