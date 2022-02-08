@@ -181,34 +181,35 @@ class MemberManage extends React.Component<CombinedMemberManageProps, MemberMana
 
       return (
         <div className="member-area">
+          <div className="member-list">
+            {/* show leader */}
+            <UserProfileCard
+              user={leader}
+              showLeaderIcon
+            />
 
-          {/* show leader */}
-          <UserProfileCard
-            user={leader}
-            showLeaderIcon
-          />
+            {/* show members */}
+            {this.state.selectedTeam.members.map(member => (
+              this.state.selectedTeam?.leader.userId !== member.userId ?
+                <UserProfileCard
+                  user={member}
+                  key={member.userId}
+                  onClickTransferOwner={isLoginUserLeader ? this.handleClickTransferOwner : undefined }
+                  onClickRemoveMember={isLoginUserLeader ? this.handleClickRemoveMember : undefined }
+                />
+              :
+                null
+            ))}
 
-          {/* show members */}
-          {this.state.selectedTeam.members.map(member => (
-            this.state.selectedTeam?.leader.userId !== member.userId ?
-              <UserProfileCard
-                user={member}
-                key={member.userId}
-                onClickTransferOwner={isLoginUserLeader ? this.handleClickTransferOwner : undefined }
-                onClickRemoveMember={isLoginUserLeader ? this.handleClickRemoveMember : undefined }
-              />
+            {/* show adding member button */}
+            {isLoginUserLeader ? 
+              <div className="add-member-wrapper" ref={el => this.addingMemberEl = el}>
+                {this.renderAddMember()}
+              </div>
             :
               null
-          ))}
-
-          {/* show adding member button */}
-          {isLoginUserLeader ? 
-            <div className="add-member-wrapper" ref={el => this.addingMemberEl = el}>
-              {this.renderAddMember()}
-            </div>
-          :
-            null
-          }
+            }
+          </div>
         </div>
       )
     }
