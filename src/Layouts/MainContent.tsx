@@ -21,7 +21,7 @@ class MainContent extends React.Component<MainContentProps, MainContentStates> {
     super(props)
 
     this.state = {
-      isSidebarOpen: true
+      isSidebarOpen: window.innerWidth > 480
     }
   }
 
