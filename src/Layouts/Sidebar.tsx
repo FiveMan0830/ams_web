@@ -3,7 +3,7 @@ import './Sidebar.scss'
 import {
   Home as HomeIcon,
   Group as GroupIcon,
-  Person as PersonIcon,
+  // Person as PersonIcon,
   // Settings as SettingsIcon
 } from '@mui/icons-material';
 import { Divider } from '@mui/material';
@@ -49,7 +49,7 @@ class Sidebar extends React.Component<SidebarProps, SidebarStates> {
   }
 
   render() {
-    const currentPath = window.location.pathname
+    // const currentPath = window.location.pathname
     return (
       <div className="sidebar-wrapper">
         <BareLink to="/home">
@@ -62,7 +62,7 @@ class Sidebar extends React.Component<SidebarProps, SidebarStates> {
         </BareLink>
         <Divider variant="fullWidth" className="sidebar-divider"/>
 
-        <div className="sidebar-user-manage-wrapper">
+        {/* <div className="sidebar-user-manage-wrapper">
           <BareLink to="/user-manage">
             <div className="sidebar-user-manage-title">
               <div className={`sidebar-user-manage-option-background ${'/user-manage' === currentPath ? 'active' : ''}`} />
@@ -70,7 +70,7 @@ class Sidebar extends React.Component<SidebarProps, SidebarStates> {
               <span>User Manage</span>
             </div>
           </BareLink>
-        </div>
+        </div> */}
 
         <div className="sidebar-team-manage-wrapper">
           <BareLink to="/team-manage">
