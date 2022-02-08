@@ -88,6 +88,13 @@ class MemberManage extends React.Component<CombinedMemberManageProps, MemberMana
     }
   }
 
+  handleCancelAddMember = () => {
+    this.setState({
+      isAddingMember: false,
+      selectedAddUser: null
+    })
+  }
+
   handleConfirmAddUser = async () => {
     if (this.state.selectedAddUser === null) return
     
@@ -237,9 +244,9 @@ class MemberManage extends React.Component<CombinedMemberManageProps, MemberMana
         <div className="option-btn-area">
           <Button
             color="error"
-            variant="outlined"
+            variant="contained"
             className="btn-cancel-add-member"
-            onClick={() => this.setState({ isAddingMember: false })}
+            onClick={this.handleCancelAddMember}
           >
             Cancel
           </Button>

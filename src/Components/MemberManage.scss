@@ -104,9 +104,18 @@
               display: flex;
               justify-content: space-between;
               margin-top: 10px;
-
-              .btn-confirm-add-member, .btn-cancel-add-member {
+ 
+              .btn-cancel-add-member {
                 margin: 3px;
+              }
+
+              .btn-confirm-add-member {
+                margin: 3px;
+
+                &:disabled {
+                  background: rgba(46, 125, 50, .2);
+                  color: rgba(255, 255, 255, .2);
+                }
               }
             }
           }
