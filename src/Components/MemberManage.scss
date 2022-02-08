@@ -24,12 +24,20 @@
       display: flex;
       align-items: flex-end;
       padding: 10px 20px;
-      height: 10%;
+      height: 12%;
+
+      @include mobile {
+        justify-content: space-around;
+      }
+      
+      @include tablet {
+        justify-content: flex-start;
+      }
  
       .title {
         font-size: 1.5rem;
         font-weight: 600;
-        margin-right: 30px;
+        margin-right: 15px;
         margin-bottom: 2px;
       }
 
@@ -42,7 +50,7 @@
     }
 
     .member-area {
-      height: 90%;
+      height: 88%;
       box-sizing: border-box;
       overflow: auto;
       width: 100%;
