@@ -1,5 +1,6 @@
 import React from 'react'
 import './UserManage.scss'
+import { validate } from 'isemail'
 import UserService, { User } from '../Services/UserService'
 import UserProfileCard from './UserProfileCard'
 import {
@@ -83,6 +84,25 @@ class UserManage extends React.Component<UserManageProps, UserManageState> {
 
   //////////////////////////////////////////////////////////////////////////////
   //
+  // function for field validation
+  //
+  //////////////////////////////////////////////////////////////////////////////
+  isValidFormData = () => {
+    return (
+      this.state.addUserFormData.username !== '' &&
+      this.state.addUserFormData.name !== '' &&
+      this.state.addUserFormData.surname !== '' &&
+      this.isValidEmail(this.state.addUserFormData.email) &&
+      this.state.addUserFormData.password !== ''
+    )
+  }
+  
+  isValidEmail = (email: string) => {
+    return validate(email)
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  //
   // functions for event handling
   //
   //////////////////////////////////////////////////////////////////////////////
@@ -149,6 +169,8 @@ class UserManage extends React.Component<UserManageProps, UserManageState> {
 
   handleConfirmAddUser = async () => {
     this.setState({ isSubmitAddUserClicked: true })
+    if (!this.isValidFormData()) return
+
     try {
       await UserService.createUser({
         username: this.state.addUserFormData.username,
