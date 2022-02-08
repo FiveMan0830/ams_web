@@ -84,6 +84,7 @@ export default class TeamService {
       `${apiV1Url}/team/${teamId}/member`
     )
     connector.setContentType('application/json')
+    connector.setBearerAuth()
     connector.setRequestData({
       userId: userId
     })
