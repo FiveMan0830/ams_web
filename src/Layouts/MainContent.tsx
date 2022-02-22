@@ -2,8 +2,8 @@ import React from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import Error from '../Components/Error'
 import Home from '../Components/Home'
-import TeamManage from '../Components/TeamManage'
-import MemberManage from '../Components/MemberManage'
+// import TeamManage from '../Components/TeamManage'
+// import MemberManage from '../Components/MemberManage'
 import Navbar from './Navbar'
 import './MainContent.scss'
 import Sidebar from '../Layouts/Sidebar'
@@ -44,9 +44,9 @@ class MainContent extends React.Component<MainContentProps, MainContentStates> {
               <Route path="/" element={<Navigate to="/home" />} />
               <Route path="/home" element={<Home />} />
               {/* <Route path="/user-manage" element={<UserManage />} /> */}
-              <Route path="/team-manage" element={<Navigate to="/team-manage/teams" />} />
-              <Route path="/team-manage/teams" element={<TeamManage />} />
-              <Route path="/team-manage/members" element={<MemberManage />} />
+              {/* <Route path="/team-manage" element={<Navigate to="/team-manage/teams" />} /> */}
+              {/* <Route path="/team-manage/teams" element={<TeamManage />} /> */}
+              {/* <Route path="/team-manage/members" element={<MemberManage />} /> */}
               {/* <Route path="/settings" element={<Navigate to="/settings/edit-profile" />} />
               <Route path="/settings/edit-profile" element={<Settings />} /> */}
               <Route path="*" element={<Error />} />

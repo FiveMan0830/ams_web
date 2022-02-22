@@ -2,7 +2,7 @@ import React from 'react'
 import './Sidebar.scss'
 import {
   Home as HomeIcon,
-  Group as GroupIcon,
+  // Group as GroupIcon,
   // Person as PersonIcon,
   // Settings as SettingsIcon
 } from '@mui/icons-material';
@@ -72,7 +72,7 @@ class Sidebar extends React.Component<SidebarProps, SidebarStates> {
           </BareLink>
         </div> */}
 
-        <div className="sidebar-team-manage-wrapper">
+        {/* <div className="sidebar-team-manage-wrapper">
           <BareLink to="/team-manage">
             <div className="sidebar-team-manage-title">
               <GroupIcon sx={{marginRight: 1}} />
@@ -81,7 +81,7 @@ class Sidebar extends React.Component<SidebarProps, SidebarStates> {
           </BareLink>
 
           {this.renderTeamManageArea()}
-        </div>
+        </div> */}
 
         {/* <div className="sidebar-settings">
           <BareLink to="/settings">
