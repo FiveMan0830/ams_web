@@ -71,6 +71,20 @@
       cursor: pointer;
     }
   }
+
+  .err-msg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #E74C3C;
+    background: #fff8f8;
+    color: #E74C3C;
+    margin: 5px auto;
+    width: 70%;
+    height: 30px;
+    font-size: 0.7rem;
+  }
 }
 
 @keyframes move-top {

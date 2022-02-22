@@ -1,14 +1,18 @@
 import { ChangeEvent, Component } from 'react'
 import './Login.scss'
 import AuthService from '../Services/AuthService'
+import {
+  ErrorOutline as ErrorOutlineIcon
+} from '@mui/icons-material'
 
 interface LoginProps {
   location?: string
 }
 
 interface LoginState {
-  account: string,
+  account: string
   password: string
+  isLoginFail: boolean
 }
 
 class Login extends Component<LoginProps, LoginState> {
@@ -19,7 +23,8 @@ class Login extends Component<LoginProps, LoginState> {
 
     this.state = {
       account: '',
-      password: ''
+      password: '',
+      isLoginFail: false
     }
 
     this.redirectUrl = ''
@@ -47,9 +52,13 @@ class Login extends Component<LoginProps, LoginState> {
       this.redirectUrl += `?access_token=${accessToken}`
 
       window.location.href = this.redirectUrl
-    } catch (err) {
+    } catch (err: any) {
       console.log(err)
-      window.location.href = '/error'
+      
+      if (err.response.status === 401) {
+        this.setState({ isLoginFail: true }) 
+      }
+      // window.location.href = '/error'
     }
   }
 
@@ -92,6 +101,14 @@ class Login extends Component<LoginProps, LoginState> {
             className={(this.state.account && this.state.password) ? "active" : ""}
             disabled={this.state.account === '' || this.state.password === ''}
           />
+          {this.state.isLoginFail ? 
+            <div className="err-msg">
+              <ErrorOutlineIcon sx={{ fontSize: 18 }} />
+              <span>Incorrect username or password</span>
+            </div>
+          :
+            null
+          }
         </div>
       </div> 
     )
