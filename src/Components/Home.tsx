@@ -40,7 +40,7 @@ export default class Home extends React.Component {
   render() {
     return (
       <div>
-        <h1>Welcome to AMS</h1>
+        <h1 style={{ color: 'white' }}>Welcome to AMS</h1>
 
         {/* <button onClick={this.setCookie} style={{margin: '10px'}}>Click me to set cookie</button>
         <button onClick={this.clickButton} style={{margin: '10px'}}>Call /need-auth</button>
