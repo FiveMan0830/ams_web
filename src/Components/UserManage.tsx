@@ -140,7 +140,7 @@ class UserManage extends React.Component<UserManageProps, UserManageState> {
   }
 
   handleTypeInSearchBar = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const text = event.target.value
+    const text = event.target.value.toLowerCase()
     this.setState({ searchString: text })
   }
 
@@ -223,7 +223,7 @@ class UserManage extends React.Component<UserManageProps, UserManageState> {
         <div className="user-list-area">
           <div className="user-list">
             {this.state.users
-              .filter(user => user.username.includes(this.state.searchString))
+              .filter(user => user.username.toLowerCase().includes(this.state.searchString) || user.displayName.toLowerCase().includes(this.state.searchString))
               .map(user => (
                 <UserProfileCard
                   user={user}
