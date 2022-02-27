@@ -48,7 +48,7 @@ class UserProfileCard extends React.Component<UserProfileCardProps, UserProfileC
           :
             null
           }
-          <span className="member-profile-title">{this.props.user.username}</span>
+          <span className="member-profile-title">{this.props.user.displayName}</span>
         </div>
         <div className="member-profile-content">
           <div className="member-profile-section">
@@ -56,8 +56,8 @@ class UserProfileCard extends React.Component<UserProfileCardProps, UserProfileC
             <span className="profile-value">{this.props.user.email}</span>
           </div>
           <div className="member-profile-section">
-            <span className="profile-key">Name</span>
-            <span className="profile-value">{this.props.user.displayName}</span>
+            <span className="profile-key">Username</span>
+            <span className="profile-value">{this.props.user.username}</span>
           </div>
         </div>
         <div className="operation-btn-area">
