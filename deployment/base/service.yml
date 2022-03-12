@@ -3,10 +3,11 @@ kind: Service
 metadata:
   name: ams-web-svc
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: ams-web
   ports:
   - name: http
+    nodePort: 30101
     port: 80
     targetPort: 80
